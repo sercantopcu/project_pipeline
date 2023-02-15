@@ -3,7 +3,7 @@ env:
   app_version:     "latest"
   repo_region:     "us-central1"
   project_id:      "${{ secrets.PROJECT_ID }}"
-  app_name:        "traefik:latest"
+  app_name:        "traefik"
   tag_new_version: "${GITHUB_SHA}"
 
   # Sonar stuff, please update accordingly
@@ -87,6 +87,6 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Image push
-        working-directory: ${{ env.app_name }}
+        # working-directory: ${{ env.app_name }}
         run: |
           docker push ${{ env.repo_region }}-docker.pkg.dev/${{ env.project_id }}/${{ env.app_name }}/${{ env.app_name }}:${{ env.tag_new_version }}
