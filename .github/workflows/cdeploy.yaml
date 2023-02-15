@@ -1,12 +1,12 @@
 env:
   region:             "us-central1"
-  app_name:           "traefik"
+  app_name:           "artemis"
   app_version:        ${GITHUB_SHA} 
-  app_port:           "8080"
+  app_port:           "5000"
   project_id:         "${{ secrets.PROJECT_ID }}"
-  repository:         "us-central1-docker.pkg.dev/${{ secrets.PROJECT_ID }}/traefik/traefik"
+  repository:         "us-central1-docker.pkg.dev/${{ secrets.PROJECT_ID }}/artemis/artemis"
   cluster_name:       "project-cluster"
-  helm_repository:    "https://github.com/Malik20A/custom_helm_chart.git"
+  helm_repository:    "https://github.com/farrukh90/custom_helm_chart.git"
   google_domain_name: "${{ secrets.GOOGLE_DOMAIN_NAME }}"
   environment:        "dev"
   

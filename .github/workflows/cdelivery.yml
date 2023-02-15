@@ -1,9 +1,9 @@
 env:
-  repo:            "https://github.com/traefik/traefik"
-  app_version:     "master"
+  repo:            "https://github.com/farrukh90/artemis.git"
+  app_version:     "9.0.0"
   repo_region:     "us-central1"
   project_id:      "${{ secrets.PROJECT_ID }}"
-  app_name:        "traefik"
+  app_name:        "artemis"
   tag_new_version: "${GITHUB_SHA}"
 
   # Sonar stuff, please update accordingly
@@ -78,11 +78,11 @@ jobs:
           # docker image prune -af
 
 
-      - name: Pre-build Image
-        working-directory: ${{ env.app_name }}
-        run: |
-          rm -rf static/ autogen/
-          make binary
+      # - name: Pre-build Image
+      #   working-directory: ${{ env.app_name }}
+      #   run: |
+      #     rm -rf static/ autogen/
+      #     make binary
 
 
 
