@@ -1,9 +1,9 @@
 env:
-  repo:            "https://github.com/farrukh90/artemis.git"
-  app_version:     "9.0.0"
+  repo:            "https://github.com/Luzifer/ots.git"
+  app_version:     "master"
   repo_region:     "us-central1"
   project_id:      "${{ secrets.PROJECT_ID }}"
-  app_name:        "artemis"
+  app_name:        "OTS"
   tag_new_version: "${GITHUB_SHA}"
 
   # Sonar stuff, please update accordingly
