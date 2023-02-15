@@ -78,43 +78,43 @@ jobs:
 
 
 
-      # # Runs a set of commands using the runners shell
-      # - name: Build Image
-      #   working-directory: ${{ env.app_name }}
-      #   run: |
-      #     # docker image prune -af 
-      #     docker build -t ${{ env.app_name }}:${{ env.app_version }}   . 
+      # Runs a set of commands using the runners shell
+      - name: Build Image
+        working-directory: ${{ env.app_name }}
+        run: |
+          # docker image prune -af 
+          docker build -t ${{ env.app_name }}:${{ env.app_version }}   . 
 
 
-      # # Runs a set of commands using the runners shell
-      # - name: Tag Image
-      #   working-directory: ${{ env.app_name }}
-      #   run: |
-      #     docker image tag ${{ env.app_name }}:${{ env.app_version }} ${{ env.repo_region }}-docker.pkg.dev/${{ env.project_id }}/${{ env.app_name }}/${{ env.app_name }}:${{ env.tag_new_version }}     
+      # Runs a set of commands using the runners shell
+      - name: Tag Image
+        working-directory: ${{ env.app_name }}
+        run: |
+          docker image tag ${{ env.app_name }}:${{ env.app_version }} ${{ env.repo_region }}-docker.pkg.dev/${{ env.project_id }}/${{ env.app_name }}/${{ env.app_name }}:${{ env.tag_new_version }}     
 
 
-      # # Runs a single command using the runners shell
-      # - name: Run a one-line script
-      #   run: gcloud version 
+      # Runs a single command using the runners shell
+      - name: Run a one-line script
+        run: gcloud version 
 
 
-      # # Authenticate to GCP
-      # - id: 'auth'
-      #   name: 'Authenticate to Google Cloud'
-      #   uses: 'google-github-actions/auth@v0'
-      #   with:
-      #     credentials_json: '${{ secrets.SERVICE_ACCOUNT }}'
+      # Authenticate to GCP
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v0'
+        with:
+          credentials_json: '${{ secrets.SERVICE_ACCOUNT }}'
 
 
-      # - name: Authenticate to repository
-      #   run: |
-      #     gcloud auth configure-docker  ${{ env.repo_region }}-docker.pkg.dev
+      - name: Authenticate to repository
+        run: |
+          gcloud auth configure-docker  ${{ env.repo_region }}-docker.pkg.dev
 
           
 
 
-      # # Runs a set of commands using the runners shell
-      # - name: Image push
-      #   working-directory: ${{ env.app_name }} 
-      #   run: |
-      #     docker push ${{ env.repo_region }}-docker.pkg.dev/${{ env.project_id }}/${{ env.app_name }}/${{ env.app_name }}:${{ env.tag_new_version }}
+      # Runs a set of commands using the runners shell
+      - name: Image push
+        working-directory: ${{ env.app_name }} 
+        run: |
+          docker push ${{ env.repo_region }}-docker.pkg.dev/${{ env.project_id }}/${{ env.app_name }}/${{ env.app_name }}:${{ env.tag_new_version }}
