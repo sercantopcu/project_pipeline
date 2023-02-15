@@ -1,9 +1,9 @@
 env:
-  repo:            "https://github.com/Luzifer/ots.git"
+  repo:            "https://github.com/getredash/redash.git"
   app_version:     "master"
   repo_region:     "us-central1"
   project_id:      "${{ secrets.PROJECT_ID }}"
-  app_name:        "ots"
+  app_name:        "redash"
   tag_new_version: "${GITHUB_SHA}"
 
   # Sonar stuff, please update accordingly
