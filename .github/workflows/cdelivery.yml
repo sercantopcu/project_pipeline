@@ -1,9 +1,9 @@
 env:
-  repo:            "https://github.com/getredash/redash.git"
-  app_version:     "master"
+  repo:            "https://github.com/traefik/traefik.git"
+  app_version:     "v2.0"
   repo_region:     "us-central1"
   project_id:      "${{ secrets.PROJECT_ID }}"
-  app_name:        "redash"
+  app_name:        "traefik"
   tag_new_version: "${GITHUB_SHA}"
 
   # Sonar stuff, please update accordingly
@@ -75,14 +75,14 @@ jobs:
         working-directory: ${{ env.app_name }}
         run: |
           echo "hello"
-          # docker image prune -af
+          docker image prune -af
 
 
-      # - name: Pre-build Image
-      #   working-directory: ${{ env.app_name }}
-      #   run: |
-      #     # rm -rf static/ autogen/
-      #     make 
+      - name: Pre-build Image
+        working-directory: ${{ env.app_name }}
+        run: |
+          rm -rf static/ autogen/
+          make
 
 
 
