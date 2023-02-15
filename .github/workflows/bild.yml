@@ -78,12 +78,17 @@ jobs:
           docker image prune -af
 
 
+      - name: Pre-build Image
+        working-directory: ${{ env.app_name }}
+        run: |
+          make
+
+
 
       # Runs a set of commands using the runners shell
       - name: Build Image
         working-directory: ${{ env.app_name }}
         run: |
-          # docker image prune -af
           docker build -t ${{ env.app_name }}:${{ env.app_version }}   . 
 
 
