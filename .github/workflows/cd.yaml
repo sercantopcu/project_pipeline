@@ -55,12 +55,15 @@ jobs:
           git clone "${{ env.helm_repository }}"
         
 
-      # Get k8s credentials
-      - name: Get k8s credentials
-        run: |
-          gcloud container clusters get-credentials "${{ env.cluster_name }}" --region  "${{ env.region }}"
-          kubectl get nodes
-
+      # # Get k8s credentials
+      # - name: Get k8s credentials
+      #   run: |
+      #     gcloud container clusters get-credentials "${{ env.cluster_name }}" --region  "${{ env.region }}"
+      #     kubectl get nodes
+      - id: 'auth-to-k8s'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: '${{ secrets.SERVICE_ACCOUNT }}'
       
       - name: Configure Backend
         working-directory: "custom_helm_chart"
