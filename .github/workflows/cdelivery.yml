@@ -1,6 +1,6 @@
 env:
   repo:            "https://github.com/Luzifer/ots.git"
-  app_version:     "master"
+  app_version:     "0.24.0"
   repo_region:     "us-central1"
   project_id:      "${{ secrets.PROJECT_ID }}"
   app_name:        "OTS"
