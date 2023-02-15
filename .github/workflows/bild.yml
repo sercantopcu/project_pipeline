@@ -44,84 +44,83 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Clone a repo
         run: |
+          git clone ${{ env.repo }}  
+
+      - name: Setup sonarqube
+        if: ${{env.enable_sonar == 'true'}}
+        uses: warchant/setup-sonar-scanner@v3
+
+      - name: Run sonarqube
+        if: ${{env.enable_sonar == 'true'}}
+        run: sonar-scanner
+            -Dsonar.organization=${{ env.sonar_organization }}                              
+            -Dsonar.projectKey=${{ env.sonar_projectKey }}                         
+            -Dsonar.login=${{ env.sonar_login }}                                   
+            -Dsonar.host.url=https://sonarcloud.io
+
+
+
+
+      # Runs a set of commands using the runners shell
+      - name: Switch Branches
+        working-directory: ${{ env.app_name }}
+        run: |
+          git checkout ${{ env.app_version }}
+          ls -l
+
+
+
+      # Runs a set of commands using the runners shell
+      - name: Remove Old Images
+        working-directory: ${{ env.app_name }}
+        run: |
           echo "hello"
-      #     git clone ${{ env.repo }}  
+          # docker image prune -af
 
-      # - name: Setup sonarqube
-      #   if: ${{env.enable_sonar == 'true'}}
-      #   uses: warchant/setup-sonar-scanner@v3
 
-      # - name: Run sonarqube
-      #   if: ${{env.enable_sonar == 'true'}}
-      #   run: sonar-scanner
-      #       -Dsonar.organization=${{ env.sonar_organization }}                              
-      #       -Dsonar.projectKey=${{ env.sonar_projectKey }}                         
-      #       -Dsonar.login=${{ env.sonar_login }}                                   
-      #       -Dsonar.host.url=https://sonarcloud.io
+      - name: Pre-build Image
+        working-directory: ${{ env.app_name }}
+        run: |
+          make
 
 
 
-
-      # # Runs a set of commands using the runners shell
-      # - name: Switch Branches
-      #   working-directory: ${{ env.app_name }}
-      #   run: |
-      #     git checkout ${{ env.app_version }}
-      #     ls -l
+      # Runs a set of commands using the runners shell
+      - name: Build Image
+        working-directory: ${{ env.app_name }}
+        run: |
+          docker build -t ${{ env.app_name }}:${{ env.app_version }}   . 
 
 
-
-      # # Runs a set of commands using the runners shell
-      # - name: Remove Old Images
-      #   working-directory: ${{ env.app_name }}
-      #   run: |
-      #     echo "hello"
-      #     # docker image prune -af
+      # Runs a set of commands using the runners shell
+      - name: Tag Image
+        working-directory: ${{ env.app_name }}
+        run: |
+          docker image tag ${{ env.app_name }}:${{ env.app_version }} ${{ env.repo_region }}-docker.pkg.dev/${{ env.project_id }}/${{ env.app_name }}/${{ env.app_name }}:${{ env.tag_new_version }}     
 
 
-      # - name: Pre-build Image
-      #   working-directory: ${{ env.app_name }}
-      #   run: |
-      #     make
+      # Runs a single command using the runners shell
+      - name: Verify Gcloud Installation
+        run: gcloud version 
 
 
-
-      # # Runs a set of commands using the runners shell
-      # - name: Build Image
-      #   working-directory: ${{ env.app_name }}
-      #   run: |
-      #     docker build -t ${{ env.app_name }}:${{ env.app_version }}   . 
-
-
-      # # Runs a set of commands using the runners shell
-      # - name: Tag Image
-      #   working-directory: ${{ env.app_name }}
-      #   run: |
-      #     docker image tag ${{ env.app_name }}:${{ env.app_version }} ${{ env.repo_region }}-docker.pkg.dev/${{ env.project_id }}/${{ env.app_name }}/${{ env.app_name }}:${{ env.tag_new_version }}     
+      # Authenticate to GCP
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v0'
+        with:
+          credentials_json: '${{ secrets.SERVICE_ACCOUNT }}'
 
 
-      # # Runs a single command using the runners shell
-      # - name: Verify Gcloud Installation
-      #   run: gcloud version 
-
-
-      # # Authenticate to GCP
-      # - id: 'auth'
-      #   name: 'Authenticate to Google Cloud'
-      #   uses: 'google-github-actions/auth@v0'
-      #   with:
-      #     credentials_json: '${{ secrets.SERVICE_ACCOUNT }}'
-
-
-      # - name: Authenticate to repository
-      #   run: |
-      #     gcloud auth configure-docker  ${{ env.repo_region }}-docker.pkg.dev
+      - name: Authenticate to repository
+        run: |
+          gcloud auth configure-docker  ${{ env.repo_region }}-docker.pkg.dev
 
           
 
 
-      # # Runs a set of commands using the runners shell
-      # - name: Image push
-      #   working-directory: ${{ env.app_name }}
-      #   run: |
-      #     docker push ${{ env.repo_region }}-docker.pkg.dev/${{ env.project_id }}/${{ env.app_name }}/${{ env.app_name }}:${{ env.tag_new_version }}
+      # Runs a set of commands using the runners shell
+      - name: Image push
+        working-directory: ${{ env.app_name }}
+        run: |
+          docker push ${{ env.repo_region }}-docker.pkg.dev/${{ env.project_id }}/${{ env.app_name }}/${{ env.app_name }}:${{ env.tag_new_version }}
