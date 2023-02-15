@@ -56,7 +56,6 @@ jobs:
             -Dsonar.organization=${{ env.sonar_organization }}                              
             -Dsonar.projectKey=${{ env.sonar_projectKey }}                         
             -Dsonar.login=${{ env.sonar_login }}                                   
-            -Dsonar.sources=traefik/
             -Dsonar.host.url=https://sonarcloud.io
 
 
