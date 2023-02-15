@@ -1,6 +1,6 @@
 env:
   repo:            "https://github.com/Luzifer/ots.git"
-  app_version:     "0.24.0"
+  app_version:     "master"
   repo_region:     "us-central1"
   project_id:      "${{ secrets.PROJECT_ID }}"
   app_name:        "OTS"
@@ -50,13 +50,13 @@ jobs:
         if: ${{env.enable_sonar == 'true'}}
         uses: warchant/setup-sonar-scanner@v3
 
-      - name: Run sonarqube
-        if: ${{env.enable_sonar == 'true'}}
-        run: sonar-scanner
-            -Dsonar.organization=${{ env.sonar_organization }}                              
-            -Dsonar.projectKey=${{ env.sonar_projectKey }}                         
-            -Dsonar.login=${{ env.sonar_login }}                                   
-            -Dsonar.host.url=https://sonarcloud.io
+      # - name: Run sonarqube
+      #   if: ${{env.enable_sonar == 'true'}}
+      #   run: sonar-scanner
+      #       -Dsonar.organization=${{ env.sonar_organization }}                              
+      #       -Dsonar.projectKey=${{ env.sonar_projectKey }}                         
+      #       -Dsonar.login=${{ env.sonar_login }}                                   
+      #       -Dsonar.host.url=https://sonarcloud.io
 
 
 
@@ -78,11 +78,11 @@ jobs:
           # docker image prune -af
 
 
-      # - name: Pre-build Image
-      #   working-directory: ${{ env.app_name }}
-      #   run: |
-      #     rm -rf static/ autogen/
-      #     make binary
+      - name: Pre-build Image
+        working-directory: ${{ env.app_name }}
+        run: |
+          # rm -rf static/ autogen/
+          make 
 
 
 
