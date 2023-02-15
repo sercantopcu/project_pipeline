@@ -2,7 +2,7 @@ env:
   region:             "us-central1"
   app_name:           "traefik"
   app_version:        ${GITHUB_SHA} 
-  app_port:           "80"
+  app_port:           "8080 80"
   project_id:         "${{ secrets.PROJECT_ID }}"
   repository:         "us-central1-docker.pkg.dev/${{ secrets.PROJECT_ID }}/traefik/traefik"
   cluster_name:       "project-cluster"
@@ -10,19 +10,19 @@ env:
   google_domain_name: "${{ secrets.GOOGLE_DOMAIN_NAME }}"
   environment:        "dev"
   
-name: ContinuousDeployment
-on:
-  workflow_run:
-    workflows: ["ContinuousDelivery"]
-    types:
-      - completed
+# name: ContinuousDeployment
 # on:
-#   # Triggers the workflow on push or pull request events but only for the "main" branch
-#   push:
-#     branches: [ "main" ]
-#   pull_request:
-#     branches: [ "main" ]
-#   # Allows you to run this workflow manually from the Actions tab
+#   workflow_run:
+#     workflows: ["ContinuousDelivery"]
+#     types:
+#       - completed
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
