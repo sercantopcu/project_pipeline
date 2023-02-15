@@ -1,6 +1,6 @@
 env:
   repo:            "https://github.com/traefik/traefik.git"
-  app_version:     "v2.0"
+  app_version:     "master"
   repo_region:     "us-central1"
   project_id:      "${{ secrets.PROJECT_ID }}"
   app_name:        "traefik"
@@ -75,22 +75,22 @@ jobs:
         working-directory: ${{ env.app_name }}
         run: |
           echo "hello"
-          docker image prune -af
+          # docker image prune -af
 
 
       - name: Pre-build Image
         working-directory: ${{ env.app_name }}
         run: |
-          rm -rf static/ autogen/
+          # rm -rf static/ autogen/
           make
 
 
 
-      # Runs a set of commands using the runners shell
-      - name: Build Image
-        working-directory: ${{ env.app_name }}
-        run: |
-          docker build -t ${{ env.app_name }}:${{ env.app_version }}   . 
+      # # Runs a set of commands using the runners shell
+      # - name: Build Image
+      #   working-directory: ${{ env.app_name }}
+      #   run: |
+      #     docker build -t ${{ env.app_name }}:${{ env.app_version }}   . 
 
 
       # Runs a set of commands using the runners shell
