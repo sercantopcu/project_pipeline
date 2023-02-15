@@ -1,19 +1,15 @@
 # env:
 #   region:             "us-central1"
 #   app_name:           "traefik"
-#   app_version:        ${GITHUB_SHA}
-#   app_port:           "80"
+#   app_version:        ${GITHUB_SHA} 
+#   app_port:           "8080"
 #   project_id:         "${{ secrets.PROJECT_ID }}"
 #   repository:         "us-central1-docker.pkg.dev/${{ secrets.PROJECT_ID }}/traefik/traefik"
 #   cluster_name:       "project-cluster"
-#   helm_repository:    "https://github.com/farrukh90/custom_helm_chart.git"
+#   helm_repository:    "https://github.com/Malik20A/custom_helm_chart.git"
 #   google_domain_name: "${{ secrets.GOOGLE_DOMAIN_NAME }}"
 #   environment:        "dev"
-#   github_username:    "Malik20A"
-#   slack_enabled:      "false"
-
-
-
+  
 # name: ContinuousDeployment
 # on:
 #   workflow_run:
@@ -26,7 +22,7 @@
 # #     branches: [ "main" ]
 # #   pull_request:
 # #     branches: [ "main" ]
-#   # Allows you to run this workflow manually from the Actions tab
+# #   # Allows you to run this workflow manually from the Actions tab
 #   workflow_dispatch:
 
 # # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -53,13 +49,6 @@
 #       - name: Check Out Helm Repo
 #         run: |
 #           git clone "${{ env.helm_repository }}"
-        
-
-#       # Get k8s credentials
-#       - name: Get k8s credentials
-#         run: |
-#           gcloud container clusters get-credentials "${{ env.cluster_name }}" --region  "${{ env.region }}"
-#           kubectl get nodes
 
       
 #       - name: Configure Backend
@@ -76,9 +65,23 @@
 #       - name: Create workspace
 #         working-directory: "custom_helm_chart"
 #         run: |
-#           terraform workspace  select  ${{ env.environment }}   ||  terraform workspace  new  ${{ env.environment }}
+#           terraform workspace  select  dev   ||  terraform workspace  new  dev
 
+#       - id: 'auth-to-k8s'
+#         uses: 'google-github-actions/auth@v1'
+#         with:
+#           credentials_json: '${{ secrets.SERVICE_ACCOUNT }}'
 
+#       - id: 'get-credentials'
+#         uses: 'google-github-actions/get-gke-credentials@v1'
+#         with:
+#           cluster_name: 'project-cluster'
+#           location: 'us-central1'
+
+#       # The KUBECONFIG env var is automatically exported and picked up by kubectl.
+#       - id: 'kubeconfig'
+#         run: 'mkdir ~/.kube && cat $KUBECONFIG > ~/.kube/config'
+            
 #       # Runs a set of commands using the runners shell
 #       - name: Deploy Application
 #         working-directory: "custom_helm_chart"
@@ -93,18 +96,3 @@
 #           -var project_id="${{ secrets.PROJECT_ID }}" \
 #           -var environment="${{ env.environment }}" \
 #           --auto-approve
-
-
-#       - name: Send custom JSON data to Slack workflow
-#         if: ${{env.slack_enabled == 'true'}}
-#         id: slack
-#         uses: slackapi/slack-github-action@v1.23.0
-#         with:
-#           # For posting a rich message using Block Kit
-#           payload: |
-#             {
-#               "text": "GitHub Action build result: ${{ job.status }}\n\n\n\nApplication  ${{ env.app_name }} ${{ env.app_version }}  has been deployed for ${{ env.github_username }} \n\n\n\nSuccessfully"
-#             }
-#         env:
-#           SLACK_WEBHOOK_URL: "https://hooks.slack.com/services/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"
-#           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
