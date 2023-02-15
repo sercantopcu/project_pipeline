@@ -64,6 +64,16 @@ jobs:
         uses: 'google-github-actions/auth@v1'
         with:
           credentials_json: '${{ secrets.SERVICE_ACCOUNT }}'
+
+      - id: 'get-credentials'
+        uses: 'google-github-actions/get-gke-credentials@v1'
+        with:
+          cluster_name: 'project-cluster'
+          location: 'us-central1'
+
+      # The KUBECONFIG env var is automatically exported and picked up by kubectl.
+      - id: 'kubeconfig'
+        run: 'mkdir ~/.kube && cat $KUBECONFIG > ~/.kube/config'
       
       - name: Configure Backend
         working-directory: "custom_helm_chart"
