@@ -1,6 +1,6 @@
 env:
   repo:            "https://github.com/traefik/traefik"
-  app_version:     "v2.9"
+  app_version:     "v3.0"
   repo_region:     "us-central1"
   project_id:      "${{ secrets.PROJECT_ID }}"
   app_name:        "traefik"
