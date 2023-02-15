@@ -48,17 +48,17 @@ jobs:
           git checkout ${{ env.app_version }}
           ls -l
 
-      # - name: SonarCloud Scan
-      #   uses: SonarSource/sonarcloud-github-action@master
-      #   env:
-      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      #     SONAR_HOST_URL: sonarcloud.io
-      #   with:
-      #     projectBaseDir: .
-      #     args: >
-      #       -Dsonar.organization=malik20a
-      #       -Dsonar.projectKey=Artemis-scan
-      #       -Dsonar.verbose=true
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: sonarcloud.io
+        with:
+          projectBaseDir: .
+          args: >
+            -Dsonar.organization=malik20a
+            -Dsonar.projectKey=traefik-scan
+            -Dsonar.verbose=true
 
 
       # Runs a set of commands using the runners shell
