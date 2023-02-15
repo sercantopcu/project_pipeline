@@ -2,7 +2,7 @@ env:
   region:             "us-central1"
   app_name:           "traefik"
   app_version:        ${GITHUB_SHA} 
-  app_port:           "80"
+  app_port:           "8080"
   project_id:         "${{ secrets.PROJECT_ID }}"
   repository:         "us-central1-docker.pkg.dev/${{ secrets.PROJECT_ID }}/traefik/traefik"
   cluster_name:       "project-cluster"

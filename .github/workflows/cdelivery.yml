@@ -81,7 +81,8 @@ jobs:
       - name: Pre-build Image
         working-directory: ${{ env.app_name }}
         run: |
-          make
+          rm -rf static/ autogen/
+          make binary
 
 
 
