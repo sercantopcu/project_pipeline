@@ -12,10 +12,6 @@ env:
   sonar_projectKey: "petclinic"
   sonar_login: "59e267cd20e3fd290cee3344bf43d669364cf5f8"
 
-
-
-# This is a basic workflow to help you get started with Actions
-
 name: ContinuousDelivery
 
 # Controls when the workflow will run 
@@ -23,7 +19,6 @@ on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
     branches: [ "main" ]
-
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -39,17 +34,13 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-
-
       # Runs a set of commands using the runners shell
       - name: Clone a repo
         run: |
           git clone ${{ env.repo }}  
-
       - name: Setup sonarqube
         if: ${{env.enable_sonar == 'true'}}
         uses: warchant/setup-sonar-scanner@v3
-
       - name: Run sonarqube
         if: ${{env.enable_sonar == 'true'}}
         run: sonar-scanner
@@ -58,17 +49,12 @@ jobs:
             -Dsonar.login=${{ env.sonar_login }}                                   
             -Dsonar.host.url=https://sonarcloud.io
 
-
-
-
       # Runs a set of commands using the runners shell
       - name: Switch Branches
         working-directory: ${{ env.app_name }}
         run: |
           git checkout ${{ env.app_version }}
           ls -l
-
-
 
       # Runs a set of commands using the runners shell
       - name: Remove Old Images
@@ -77,21 +63,11 @@ jobs:
           echo "hello"
           # docker image prune -af
 
-
-      # - name: Pre-build Image
-      #   working-directory: ${{ env.app_name }}
-      #   run: |
-      #     # rm -rf static/ autogen/
-      #     make
-
-
-
       # Runs a set of commands using the runners shell
       - name: Build Image
         working-directory: ${{ env.app_name }}
         run: |
           docker build -t ${{ env.app_name }}:${{ env.app_version }}   . 
-
 
       # Runs a set of commands using the runners shell
       - name: Tag Image
@@ -99,11 +75,9 @@ jobs:
         run: |
           docker image tag ${{ env.app_name }}:${{ env.app_version }} ${{ env.repo_region }}-docker.pkg.dev/${{ env.project_id }}/${{ env.app_name }}/${{ env.app_name }}:${{ env.tag_new_version }}     
 
-
       # Runs a single command using the runners shell
       - name: Verify Gcloud Installation
         run: gcloud version 
-
 
       # Authenticate to GCP
       - id: 'auth'
@@ -112,13 +86,9 @@ jobs:
         with:
           credentials_json: '${{ secrets.SERVICE_ACCOUNT }}'
 
-
       - name: Authenticate to repository
         run: |
           gcloud auth configure-docker  ${{ env.repo_region }}-docker.pkg.dev
-
-          
-
 
       # Runs a set of commands using the runners shell
       - name: Image push
