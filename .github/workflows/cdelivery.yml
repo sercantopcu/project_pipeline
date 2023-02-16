@@ -1,9 +1,9 @@
 env:
-  repo:            "https://github.com/jazzband/website.git"
+  repo:            "https://github.com/Evolve-Cyber-Organization/spring-petclinic-95.git"
   app_version:     "main"
   repo_region:     "us-central1"
   project_id:      "${{ secrets.PROJECT_ID }}" 
-  app_name:        "website"
+  app_name:        "spring-petclinic-95"
   tag_new_version: "${GITHUB_SHA}"
 
   # Sonar stuff, please update accordingly
