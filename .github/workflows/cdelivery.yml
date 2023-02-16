@@ -7,10 +7,10 @@ env:
   tag_new_version: "${GITHUB_SHA}"
 
   # Sonar stuff, please update accordingly
-  enable_sonar:    "false"
+  enable_sonar:    "true"
   sonar_organization: "malik20a"
-  sonar_projectKey: "traefik-scan"
-  sonar_login: "a4a0683b50f3347211d477ac0d186a4400ee5528"
+  sonar_projectKey: "petclinic"
+  sonar_login: "59e267cd20e3fd290cee3344bf43d669364cf5f8"
 
 
 
