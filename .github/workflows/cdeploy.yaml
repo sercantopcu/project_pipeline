@@ -1,10 +1,10 @@
 env:
   region:             "us-central1"
-  app_name:           "Misago"
+  app_name:           "docker-nodebb"
   app_version:        ${GITHUB_SHA} 
-  app_port:            "8000"
+  app_port:            "4567"
   project_id:         "${{ secrets.PROJECT_ID }}"
-  repository:         "us-central1-docker.pkg.dev/${{ secrets.PROJECT_ID }}/Misago/Misago"
+  repository:         "us-central1-docker.pkg.dev/${{ secrets.PROJECT_ID }}/docker-nodebb/docker-nodebb"
   cluster_name:       "project-cluster"
   helm_repository:    "https://github.com/farrukh90/custom_helm_chart.git"
   google_domain_name: "${{ secrets.GOOGLE_DOMAIN_NAME }}"

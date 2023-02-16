@@ -1,9 +1,9 @@
 env:
-  repo:            "https://github.com/rafalp/Misago.git"
+  repo:            "https://github.com/rez0n/docker-nodebb.git"
   app_version:     "master"
   repo_region:     "us-central1"
   project_id:      "${{ secrets.PROJECT_ID }}"
-  app_name:        "Misago"
+  app_name:        "docker-nodebb"
   tag_new_version: "${GITHUB_SHA}"
 
   # Sonar stuff, please update accordingly
