@@ -1,5 +1,5 @@
 env:
-  repo:            "https://github.com/Evolve-Cyber-Organization/spring-petclinic-now.git"
+  repo:            "https://github.com/Evolve-Cyber-Organization/spring-petclinic-now.git" 
   app_version:     "main"
   repo_region:     "us-central1"
   project_id:      "${{ secrets.PROJECT_ID }}" 
