@@ -1,6 +1,6 @@
 env:
-  repo:            "https://github.com/mono/website.git"
-  app_version:     "gh-pages"
+  repo:            "https://github.com/jazzband/website.git"
+  app_version:     "main"
   repo_region:     "us-central1"
   project_id:      "${{ secrets.PROJECT_ID }}" 
   app_name:        "website"
