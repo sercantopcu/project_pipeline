@@ -1,9 +1,9 @@
 env:
-  repo:            "https://github.com/saleor/saleor-storefront.git"
-  app_version:     "main"
+  repo:            "https://github.com/mono/website.git"
+  app_version:     "trunk"
   repo_region:     "us-central1"
   project_id:      "${{ secrets.PROJECT_ID }}"
-  app_name:        "saleor-storefront"
+  app_name:        "website"
   tag_new_version: "${GITHUB_SHA}"
 
   # Sonar stuff, please update accordingly
