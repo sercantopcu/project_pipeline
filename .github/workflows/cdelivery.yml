@@ -2,7 +2,7 @@ env:
   repo:            "https://github.com/mono/website.git"
   app_version:     "gh-pages"
   repo_region:     "us-central1"
-  project_id:      "${{ secrets.PROJECT_ID }}"
+  project_id:      "${{ secrets.PROJECT_ID }}" 
   app_name:        "website"
   tag_new_version: "${GITHUB_SHA}"
 
