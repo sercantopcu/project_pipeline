@@ -6,7 +6,7 @@ env:
   project_id:         "${{ secrets.PROJECT_ID }}"
   repository:         "us-central1-docker.pkg.dev/${{ secrets.PROJECT_ID }}/pet-clinic/pet-clinic"
   cluster_name:       "project-cluster"
-  helm_repository:    "https://github.com/Malik20A/custom-helm-chart.git"
+  helm_repository:    "https://github.com/Malik20A/custom_helm_chart.git"
   google_domain_name: "${{ secrets.GOOGLE_DOMAIN_NAME }}"
   environment:        "dev"
   
