@@ -8,7 +8,7 @@ env:
   cluster_name:       "project-cluster"
   helm_repository:    "https://github.com/Malik20A/custom-helm-chart.git"
   google_domain_name: "${{ secrets.GOOGLE_DOMAIN_NAME }}"
-  environment:        "dev"
+  environment:        "dev" 
   
 name: ContinuousDeployment 
 on:
