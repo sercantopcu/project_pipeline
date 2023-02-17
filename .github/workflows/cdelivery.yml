@@ -6,7 +6,7 @@ env:
   app_name:        "spring-petclinic-now"
   tag_new_version: "${GITHUB_SHA}"
 
-  # Sonar stuff, please update accordingly
+  # Sonar stuff, please update accordingly 
   enable_sonar:    "true"
   sonar_organization: "malik20a"
   sonar_projectKey: "petclinic"
