@@ -1,10 +1,10 @@
 env:
   region:             "us-central1"
-  app_name:           "spring-petclinic-now"
+  app_name:           "pet-clinic"
   app_version:        ${GITHUB_SHA} 
   app_port:            "8080"
   project_id:         "${{ secrets.PROJECT_ID }}"
-  repository:         "us-central1-docker.pkg.dev/${{ secrets.PROJECT_ID }}/spring-petclinic-now/spring-petclinic-now"
+  repository:         "us-central1-docker.pkg.dev/${{ secrets.PROJECT_ID }}/pet-clinic/pet-clinic"
   cluster_name:       "project-cluster"
   helm_repository:    "https://github.com/farrukh90/custom_helm_chart.git"
   google_domain_name: "${{ secrets.GOOGLE_DOMAIN_NAME }}"
