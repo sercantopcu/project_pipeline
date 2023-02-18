@@ -10,7 +10,7 @@ env:
   enable_sonar:    "true"
   sonar_organization: "malik20a"
   sonar_projectKey: "petclinic"
-  sonar_login: "59e267cd20e3fd290cee3344bf43d669364cf5f8"
+  sonar_login: "59e267cd20e3fd290cee3344bf43d669364cf5f8" 
 
 name: ContinuousDelivery
 
