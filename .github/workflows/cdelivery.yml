@@ -7,8 +7,8 @@ env:
   tag_new_version: "${GITHUB_SHA}" 
 
   # Sonar stuff, please update accordingly 
-  enable_sonar:    "true"
-  sonar_organization: "malik20a"
+  enable_sonar:    "false"
+  sonar_organization: "sercantopcu"
   sonar_projectKey: "petclinic"
   sonar_login: "59e267cd20e3fd290cee3344bf43d669364cf5f8" 
 
